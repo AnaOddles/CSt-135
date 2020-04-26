@@ -2,9 +2,13 @@ package com.example.contactapp;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
+import android.Manifest;
 import android.app.Person;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
@@ -13,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.contactapp.Base.BaseContact;
 import com.example.contactapp.DataAccess.FileAccessService;
@@ -69,7 +74,6 @@ public class MainActivity extends AppCompatActivity {
         et_SearchContact = findViewById(R.id.et_SearchContact);
         adapter = new AddressBookAdapter(MainActivity.this, addyBook);
 
-
         //Set the adapter to the list view
         lv_Contacts.setAdapter(adapter);
 
@@ -91,6 +95,7 @@ public class MainActivity extends AppCompatActivity {
                 //capture incoming data
                 String firstName = incomingMessages.getString("firstName");
                 String lastName = incomingMessages.getString("lastName");
+                String phoneNumber = incomingMessages.getString("phoneNumber");
                 String DOB = incomingMessages.getString("DOB");
                 String email = incomingMessages.getString("email");
                 String street = incomingMessages.getString("street");
@@ -103,7 +108,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //create a new person contact object with address
                 Address addy = new Address(000, street, city, state, zipCode, country);
-                PersonContact pc = new PersonContact(firstName, lastName, addy, null, email, DOB,
+                PersonContact pc = new PersonContact(firstName, lastName, phoneNumber, addy, null, email, DOB,
                         description, null);
                 pc.setAddress(addy);
 
@@ -127,6 +132,7 @@ public class MainActivity extends AppCompatActivity {
                 //capture incoming data
                 String firstName = incomingMessages.getString("firstName");
                 String lastName = incomingMessages.getString("lastName");
+                String phoneNumber = incomingMessages.getString("phoneNumber");
                 String email = incomingMessages.getString("email");
                 String street = incomingMessages.getString("street");
                 String city = incomingMessages.getString("city");
@@ -142,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //create a new business contact object with address
                 Address addy = new Address(000, street, city, state, zipCode, country);
-                BusinessContact bc = new BusinessContact(firstName, lastName, addy, null, email,
+                BusinessContact bc = new BusinessContact(firstName, lastName, phoneNumber, addy, null, email,
                         openingTime, closingTime, daysOpen, website);
                 bc.setAddress(addy);
 
@@ -209,7 +215,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+
     }
+
     //Method to edit contact
     public void editContact(int position){
         //Get the class type that is going to be edited
@@ -222,6 +231,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("edit", position);
             i.putExtra("firstName", contact.getFirstName());
             i.putExtra("lastName", contact.getlastName());
+            i.putExtra("phoneNumber", contact.getPhoneNumber());
             i.putExtra("DOB", ((PersonContact) contact).getDateOfBirth());
             i.putExtra("email", contact.getEmail());
             i.putExtra("street", contact.getAddress().getStreet());
@@ -241,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
             i.putExtra("edit", position);
             i.putExtra("firstName", contact.getFirstName());
             i.putExtra("lastName", contact.getlastName());
+            i.putExtra("phoneNumber", contact.getPhoneNumber());
             i.putExtra("email", contact.getEmail());
             i.putExtra("street", contact.getAddress().getStreet());
             i.putExtra("city", contact.getAddress().getStreet());
@@ -264,4 +275,6 @@ public class MainActivity extends AppCompatActivity {
         FAS.saveRecords(addyBook, "Contacts4.txt");
 
     }
+
+
 }
