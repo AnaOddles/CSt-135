@@ -15,7 +15,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="wrap_content"
         android:orientation="horizontal">
 
         <Button
@@ -30,7 +30,7 @@
             android:layout_width="19dp"
             android:layout_height="38dp"
             android:layout_weight="1"
-            android:text="Create a Contact"
+            android:text="  Person Contact"
             android:textSize="18sp" />
 
         <Button
@@ -45,7 +45,7 @@
     <ImageView
         android:id="@+id/iv_ContactPhoto"
         android:layout_width="match_parent"
-        android:layout_height="114dp"
+        android:layout_height="71dp"
         app:srcCompat="@android:drawable/ic_menu_gallery" />
 
     <Button
@@ -59,6 +59,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Delete" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_call"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Call" />
+
+        <Button
+            android:id="@+id/btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Text" />
+
+        <Button
+            android:id="@+id/btn_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Email" />
+
+        <Button
+            android:id="@+id/btn_maps"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Maps" />
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
@@ -83,6 +117,14 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Last Name"
+                android:inputType="textPersonName" />
+
+            <EditText
+                android:id="@+id/et_phoneNumber2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Phone Number"
                 android:inputType="textPersonName" />
 
             <EditText
